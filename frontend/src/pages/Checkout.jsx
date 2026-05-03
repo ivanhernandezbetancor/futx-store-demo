@@ -1,11 +1,41 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { ShieldCheck, Lock } from 'lucide-react';
+import { ShieldCheck, Lock, CheckCircle } from 'lucide-react';
+import { clearCart } from '../store/cartSlice';
 
 const Checkout = () => {
+  const [isProcessing, setIsProcessing] = React.useState(false);
+  const [isSuccess, setIsSuccess] = React.useState(false);
   const { items } = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
   const total = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
+
+  const handlePayment = (e) => {
+    e.preventDefault();
+    setIsProcessing(true);
+    // Simulate API call to process payment
+    setTimeout(() => {
+      setIsProcessing(false);
+      setIsSuccess(true);
+      dispatch(clearCart());
+    }, 1500);
+  };
+
+  if (isSuccess) {
+    return (
+      <div className="max-w-4xl mx-auto px-4 py-32 text-center min-h-[70vh] flex flex-col items-center justify-center">
+        <CheckCircle size={80} className="text-brand-green mb-6 mx-auto" />
+        <h2 className="text-4xl font-heading font-black text-brand-dark mb-4 uppercase">¡Pedido Completado!</h2>
+        <p className="text-lg text-gray-600 mb-8 max-w-lg">
+          Tu pago simulado ha sido procesado con éxito. Hemos enviado un correo de confirmación con los detalles de tu envío.
+        </p>
+        <Link to="/" className="btn-primary flex items-center justify-center mx-auto w-max px-8">
+          Volver a la tienda
+        </Link>
+      </div>
+    );
+  }
 
   if (items.length === 0) {
     return (
@@ -29,7 +59,7 @@ const Checkout = () => {
                 <span className="bg-brand-dark text-white w-6 h-6 rounded-full flex items-center justify-center text-sm">1</span> 
                 Dirección de Envío
               </h2>
-              <form className="space-y-4">
+              <form id="checkout-form" onSubmit={handlePayment} className="space-y-4">
                 <div className="grid grid-cols-2 gap-4">
                   <input type="text" placeholder="Nombre" className="w-full border border-gray-300 rounded-md p-3 focus:outline-none focus:border-brand-green" required />
                   <input type="text" placeholder="Apellidos" className="w-full border border-gray-300 rounded-md p-3 focus:outline-none focus:border-brand-green" required />
@@ -52,8 +82,14 @@ const Checkout = () => {
                 <Lock size={32} className="text-brand-green" />
                 <p className="text-sm font-medium text-center">El pago real mediante Stripe se habilitará en la versión de producción.</p>
               </div>
-              <button className="w-full btn-primary py-4 text-lg mt-4 flex justify-center items-center gap-2">
-                PAGAR €{total.toFixed(2)} Y COMPLETAR PEDIDO <ShieldCheck size={20} />
+              <button 
+                type="submit" 
+                form="checkout-form"
+                disabled={isProcessing}
+                className="w-full btn-primary py-4 text-lg mt-4 flex justify-center items-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
+              >
+                {isProcessing ? 'PROCESANDO PAGO...' : `PAGAR €${total.toFixed(2)} Y COMPLETAR PEDIDO`} 
+                {!isProcessing && <ShieldCheck size={20} />}
               </button>
             </div>
           </div>

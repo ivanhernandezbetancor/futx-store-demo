@@ -12,17 +12,17 @@ const Hero = () => {
         
         {/* Text Content */}
         <div className="w-full lg:w-1/2 lg:pr-12 flex flex-col justify-center text-center lg:text-left pt-10 lg:pt-0">
-          <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-full px-4 py-2 w-max mx-auto lg:mx-0 mb-6">
+          <div className="inline-flex items-center gap-2 bg-black/40 backdrop-blur-md border border-white/20 rounded-full px-4 py-2 w-max mx-auto lg:mx-0 mb-6 shadow-lg">
             <span className="flex h-2 w-2 rounded-full bg-brand-green"></span>
             <span className="text-white text-xs font-bold tracking-wider uppercase">Nueva Colección Retro 90s</span>
           </div>
           
-          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-7xl xl:text-8xl tracking-tighter font-black text-white font-heading leading-[0.9] mb-6 drop-shadow-lg">
+          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-7xl xl:text-8xl tracking-tighter font-black text-white font-heading leading-[0.9] mb-6 drop-shadow-xl">
             VISTE LA <br className="hidden lg:block"/>
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-gold to-yellow-200">HISTORIA.</span>
           </h1>
           
-          <p className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto lg:mx-0 mb-10 font-medium leading-relaxed">
+          <p className="text-lg md:text-xl text-gray-100 max-w-2xl mx-auto lg:mx-0 mb-10 font-medium leading-relaxed drop-shadow-md">
             Las camisetas que definieron épocas. 100% auténticas. Hasta un <span className="text-brand-gold font-bold">40% más baratas</span> que en tiendas oficiales. No colecciones, póntelas.
           </p>
           
@@ -30,22 +30,22 @@ const Hero = () => {
             <a href="#productos" className="bg-brand-green hover:bg-white hover:text-brand-dark text-white font-heading font-black text-lg py-4 px-8 rounded-sm transition-all duration-300 shadow-[0_0_20px_rgba(26,71,42,0.4)] flex items-center justify-center gap-2 group uppercase tracking-wide">
               Comprar Ahora <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
             </a>
-            <a href="#outlet" className="bg-transparent border border-white/30 text-white hover:bg-white/10 font-heading font-bold text-lg py-4 px-8 rounded-sm transition-all duration-300 flex items-center justify-center uppercase tracking-wide">
+            <a href="#outlet" className="bg-transparent border border-white/30 text-white hover:bg-white/10 font-heading font-bold text-lg py-4 px-8 rounded-sm transition-all duration-300 flex items-center justify-center uppercase tracking-wide shadow-md">
               Ver Outlet
             </a>
           </div>
 
           {/* Trust Badges */}
-          <div className="mt-16 grid grid-cols-3 gap-4 border-t border-white/10 pt-8">
-            <div className="flex flex-col items-center lg:items-start gap-2 text-gray-300">
+          <div className="mt-16 grid grid-cols-3 gap-4 border-t border-white/20 pt-8">
+            <div className="flex flex-col items-center lg:items-start gap-2 text-white drop-shadow-sm">
               <Truck size={24} className="text-brand-green" />
               <span className="text-xs font-bold uppercase tracking-wider text-center lg:text-left">Envío 24-72h<br/>Gratis</span>
             </div>
-            <div className="flex flex-col items-center lg:items-start gap-2 text-gray-300">
+            <div className="flex flex-col items-center lg:items-start gap-2 text-white drop-shadow-sm">
               <ShieldCheck size={24} className="text-brand-gold" />
               <span className="text-xs font-bold uppercase tracking-wider text-center lg:text-left">Calidad<br/>Premium</span>
             </div>
-            <div className="flex flex-col items-center lg:items-start gap-2 text-gray-300">
+            <div className="flex flex-col items-center lg:items-start gap-2 text-white drop-shadow-sm">
               <RotateCcw size={24} className="text-brand-red" />
               <span className="text-xs font-bold uppercase tracking-wider text-center lg:text-left">30 Días<br/>Garantía</span>
             </div>
@@ -58,8 +58,10 @@ const Hero = () => {
           <div className="relative w-full max-w-lg aspect-square">
             <div className="absolute inset-0 bg-gradient-to-tr from-brand-green/20 to-brand-gold/20 rounded-full blur-3xl animate-pulse"></div>
             <img 
-              src="https://images.unsplash.com/photo-1579952363873-27f3bade9f55?q=80&w=1000&auto=format&fit=crop" 
+              src="/images/hero_retro_jersey.png" 
               alt="FUTX Store Hero" 
+              loading="eager"
+              fetchpriority="high"
               className="relative z-10 w-full h-full object-cover rounded-2xl shadow-2xl border border-white/10 rotate-3 hover:rotate-0 transition-transform duration-500"
             />
             {/* Floating badge */}

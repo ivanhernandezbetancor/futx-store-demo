@@ -32,18 +32,20 @@ const ProductCard = ({ product }) => {
         )}
         <img 
           src={product.image} 
-          alt={product.name} 
+          alt={product.name}
+          loading="lazy" 
+          style={{ filter: product.filter || 'none' }}
           className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-700 ease-out drop-shadow-xl"
         />
         
         {/* Quick Add Overlay */}
-        <div className="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-black/60 to-transparent translate-y-full group-hover:translate-y-0 transition-transform duration-300 flex justify-center">
+        <div className="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-black/80 via-black/40 to-transparent translate-y-full group-hover:translate-y-0 transition-transform duration-300 flex justify-center">
           <div className="flex gap-2 w-full justify-center">
             {sizes.map(size => (
               <button 
                 key={size}
                 onClick={() => setSelectedSize(size)}
-                className={`w-8 h-8 rounded-full text-xs font-bold transition-colors ${selectedSize === size ? 'bg-brand-gold text-brand-dark' : 'bg-white/20 text-white hover:bg-white/40 backdrop-blur-sm'}`}
+                className={`w-8 h-8 rounded-full text-xs font-bold transition-colors ${selectedSize === size ? 'bg-brand-gold text-brand-dark' : 'bg-brand-dark/80 text-white hover:bg-brand-green backdrop-blur-sm'}`}
               >
                 {size}
               </button>
